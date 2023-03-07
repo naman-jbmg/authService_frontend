@@ -1,5 +1,5 @@
-import { Flare } from '@mui/icons-material';
-import { TextField, FormControlLabel, Checkbox, Button, Box, Alert,InputLabel,Select,MenuItem } from '@mui/material';
+
+import { TextField, FormControlLabel, Checkbox, Button, Box, Alert,InputLabel,Select,MenuItem ,FormControl} from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,12 +40,12 @@ const Registration = () => {
     <Box component='form' noValidate sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit} >
     
     <div style={{marginTop:0}}>
-    <InputLabel id="for_Title">Title</InputLabel>
+    <InputLabel id="for_Title" style={{alignSelf:'center',fontSize:'2vh'}}>Title</InputLabel>
     <Select
-        style={{marginTop:16}}
+        style={{marginTop:16,height:40}}
         labelId="for_Title"
-        id="titleID"
-        // value={}
+        id="demo-simple-select"
+        value='bnvc'
         label="Title"
         
       >
@@ -55,9 +55,17 @@ const Registration = () => {
         <MenuItem value='Mrs'>Mrs.</MenuItem>
         
       </Select>
-      <TextField  style={{marginLeft:4}} margin='normal' required  id='firstName' name='firstName' label='First Name' />
+      <TextField  sx={{
+        "& .MuiInputBase-root": {
+            height: 40
+        }
+    }}  style={{marginLeft:4}} margin='normal' required  id='firstName' name='firstName' label='First Name' />
       
-      <TextField  style={{marginLeft:3}}  margin='normal' required  id='lastName' name='lastName' label='Last Name' />
+      <TextField  sx={{
+        "& .MuiInputBase-root": {
+            height: 40
+        }
+    }} style={{marginLeft:3}}  margin='normal' required  id='lastName' name='lastName' label='Last Name' />
     </div>
       {/* <TextField margin='normal' required fullWidth id='role' name='role' label='Role' /> */}
       {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
@@ -87,6 +95,21 @@ const Registration = () => {
         <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Join</Button>
       </Box>
       {error.status ? <Alert severity={error.type}>{error.msg}</Alert> : ''}
+
+      {/* <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">Age</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    
+    label="Age"
+   
+  >
+    <MenuItem value={10}>Ten</MenuItem>
+    <MenuItem value={20}>Twenty</MenuItem>
+    <MenuItem value={30}>Thirty</MenuItem>
+  </Select>
+</FormControl> */}
     </Box>
   </>;
 };
