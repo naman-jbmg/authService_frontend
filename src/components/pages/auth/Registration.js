@@ -1,4 +1,5 @@
-import { TextField, FormControlLabel, Checkbox, Button, Box, Alert } from '@mui/material';
+import { Flare } from '@mui/icons-material';
+import { TextField, FormControlLabel, Checkbox, Button, Box, Alert,InputLabel,Select,MenuItem } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,11 +14,14 @@ const Registration = () => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const actualData = {
-      name: data.get('name'),
+      title:data.get('title'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      role:data.get('role'),
       email: data.get('email'),
       password: data.get('password'),
-      password_confirmation: data.get('password_confirmation'),
-      tc: data.get('tc'),
+      password_confirmation: data.get('confirmPassword'),
+      tc: data.get('acceptTerms'),
     }
     if (actualData.name && actualData.email && actualData.password && actualData.password_confirmation && actualData.tc !== null) {
       if (actualData.password === actualData.password_confirmation) {
@@ -33,12 +37,52 @@ const Registration = () => {
     }
   }
   return <>
-    <Box component='form' noValidate sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit}>
-      <TextField margin='normal' required fullWidth id='name' name='name' label='Name' />
+    <Box component='form' noValidate sx={{ mt: 1 }} id='registration-form' onSubmit={handleSubmit} >
+    
+    <div style={{marginTop:0}}>
+    <InputLabel id="for_Title">Title</InputLabel>
+    <Select
+        style={{marginTop:16}}
+        labelId="for_Title"
+        id="titleID"
+        // value={}
+        label="Title"
+        
+      >
+        <MenuItem value="Mr.">
+          Mr.
+        </MenuItem>
+        <MenuItem value='Mrs'>Mrs.</MenuItem>
+        
+      </Select>
+      <TextField  style={{marginLeft:4}} margin='normal' required  id='firstName' name='firstName' label='First Name' />
+      
+      <TextField  style={{marginLeft:3}}  margin='normal' required  id='lastName' name='lastName' label='Last Name' />
+    </div>
+      {/* <TextField margin='normal' required fullWidth id='role' name='role' label='Role' /> */}
+      {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
       <TextField margin='normal' required fullWidth id='email' name='email' label='Email Address' />
       <TextField margin='normal' required fullWidth id='password' name='password' label='Password' type='password' />
-      <TextField margin='normal' required fullWidth id='password_confirmation' name='password_confirmation' label='Confirm Password' type='password' />
-      <FormControlLabel control={<Checkbox value="agree" color="primary" name="tc" id="tc" />} label="I agree to term and condition." />
+      <TextField margin='normal' required fullWidth id='password_confirmation' name='confirmPassword' label='Confirm Password' type='password' />
+      <InputLabel id="for_Role">Role</InputLabel>
+
+      <Select
+        labelId="for_Role"
+        id="select-small"
+        // value={}
+        
+        label="Role"
+       
+      >
+        <MenuItem value="User">
+          User
+        </MenuItem>
+        <MenuItem value='Admin'>Admin</MenuItem>
+        <MenuItem value='HR'>HR</MenuItem>
+        <MenuItem value='Manager'>Manager</MenuItem>
+      </Select>
+      
+      <FormControlLabel style={{marginLeft:30}} control={<Checkbox value="true" color="primary" name="acceptTerms" id="tc" />} label="I agree to term and condition." />
       <Box textAlign='center'>
         <Button type='submit' variant='contained' sx={{ mt: 3, mb: 2, px: 5 }}>Join</Button>
       </Box>
@@ -48,3 +92,8 @@ const Registration = () => {
 };
 
 export default Registration;
+
+
+
+
+
